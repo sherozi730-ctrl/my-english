@@ -2,21 +2,80 @@
 <style>*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f5f7fb;color:#172033}header{background:#111827;color:#fff;padding:18px}.top,main{max-width:1000px;margin:auto}.top{display:flex;justify-content:space-between}.brand{font-size:21px;font-weight:800}.badge{background:#29334b;padding:6px 10px;border-radius:20px}main{padding:24px 16px}.hero,.card{background:#fff;border:1px solid #e5e8ef;border-radius:18px;padding:22px;box-shadow:0 8px 24px #0000000a}.hero h1{margin:0 0 8px}.muted{color:#687386;line-height:1.5}.stats{display:flex;gap:12px;margin-top:18px}.stat{flex:1;background:#f7f8fb;padding:13px;border-radius:12px}.stat b{font-size:22px;display:block}.grid{display:grid;grid-template-columns:1.5fr .8fr;gap:18px;margin-top:18px}.prompt{background:#f1f2ff;padding:18px;border-radius:13px;font-size:19px;font-weight:700;margin:18px 0 12px}textarea{width:100%;min-height:105px;padding:13px;border:1px solid #cbd1dc;border-radius:11px;font:inherit}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:11px}button{border:0;border-radius:10px;padding:11px 14px;font-weight:700;background:#5b5bd6;color:white;cursor:pointer}.secondary,.topic{background:#eef0f5;color:#273044}.feedback{display:none;margin-top:15px;padding:15px;border:1px solid #e5e8ef;border-radius:12px}.feedback.show{display:block}.answer{font-weight:700;color:#137a55;margin-bottom:6px}.topics{display:grid;gap:9px;margin-top:14px}.topic{text-align:left;border:1px solid #e5e8ef}.topic.active{background:#ededff;border-color:#b8b8f2}.words{margin-top:20px}.word{display:flex;justify-content:space-between;border-bottom:1px solid #eee;padding:10px 0;gap:12px}.word span:last-child{color:#687386;text-align:right}.progress{height:8px;background:#e8eaf0;border-radius:9px;margin-top:15px;overflow:hidden}.bar{height:100%;background:#5b5bd6;width:0}@media(max-width:720px){.grid{grid-template-columns:1fr}.hero h1{font-size:25px}}</style></head>
 <body><header><div class="top"><div class="brand">My English</div><div class="badge">B1 → B2</div></div></header><main>
 <section class="hero"><h1>Практический английский каждый день</h1><div class="muted">Переводите реальные фразы с русского на английский и запоминайте естественные формулировки для работы и повседневного общения.</div>
-<div class="stats"><div class="stat"><b id="done">0</b><small>выполнено</small></div><div class="stat"><b id="checked">0</b><small>проверено</small></div><div class="stat"><b>20</b><small>цель</small></div></div><div class="progress"><div class="bar" id="bar"></div></div></section>
+<div class="stats"><div class="stat"><b id="done">0</b><small>выполнено</small></div><div class="stat"><b id="checked">0</b><small>проверено</small></div><div class="stat"><b>40</b><small>цель</small></div></div><div class="progress"><div class="bar" id="bar"></div></div></section>
 <div class="grid"><section class="card"><h2 id="title"></h2><div class="muted" id="subtitle"></div><div class="prompt" id="prompt"></div>
 <textarea id="input" placeholder="Напишите перевод на английском..."></textarea><div class="actions"><button id="check">Check</button><button class="secondary" id="show">Show answer</button><button class="secondary" id="next">Next sentence</button></div>
 <div class="feedback" id="feedback"><div class="answer" id="answer"></div><div class="muted" id="tip"></div></div><p class="muted"><small>Прогресс сохраняется в этом браузере.</small></p></section>
-<aside class="card"><h2>Practice</h2><div class="topics"><button class="topic active" data-cat="work">💼 English for Work</button><button class="topic" data-cat="daily">💬 Everyday English</button><button class="topic" data-cat="grammar">🧩 Grammar</button></div><div class="words" id="words"></div></aside></div></main>
+<aside class="card"><h2>Practice</h2><div class="topics"><button class="topic active" data-cat="work">💼 English for Work</button><button class="topic" data-cat="airport">✈️ Airport & Delegations</button><button class="topic" data-cat="meetings">🤝 Meetings & Protocol</button><button class="topic" data-cat="daily">💬 Everyday English</button><button class="topic" data-cat="grammar">🧩 Grammar</button></div><div class="words" id="words"></div></aside></div></main>
 <script>
-const L={work:[["Машина будет ждать вас у входа.","The car will be waiting for you at the entrance.","Для места встречи естественно: at the entrance."],["Как прошёл ваш полёт?","How was your flight?","Короткий и естественный вопрос после прибытия."],["Наш коллега поможет вам с регистрацией в гостинице.","Our colleague will help you with the hotel check-in.","Help you with + существительное — естественная конструкция."],["Пожалуйста, отправьте мне информацию о вашем рейсе прибытия и вылета.","Please send me your arrival and departure flight details.","Flight details звучит естественнее дословного information about the flight."],["Заседание начнётся в 10 часов утра.","The meeting will begin at 10 a.m.","Begin подходит для официального контекста."],["Если вам понадобится помощь, пожалуйста, обращайтесь ко мне.","If you need any assistance, please feel free to contact me.","Please feel free to contact me — вежливая деловая формула."],["Просим направить текст выступления заранее.","Please send us the text of the speech in advance.","In advance означает «заранее»."],["Двусторонняя встреча состоится после обеда.","The bilateral meeting will take place in the afternoon.","Take place часто используется для официальных мероприятий."]],
-daily:[["Я немного опоздаю.","I will be a little late.","A little late — естественная формулировка."],["Я перезвоню вам через десять минут.","I will call you back in ten minutes.","In ten minutes = через десять минут."],["Не могли бы вы повторить это ещё раз?","Could you please say that again?","Could you please — вежливая просьба."],["Давайте продолжим завтра.","Let's continue tomorrow.","Let's + глагол предлагает совместное действие."]],
-grammar:[["Я работаю здесь уже пять лет.","I have worked here for five years.","Present Perfect связывает прошлое с настоящим."],["Когда я приехал, встреча уже началась.","When I arrived, the meeting had already started.","Past Perfect показывает более раннее действие в прошлом."],["Если у меня будет время, я позвоню вам.","If I have time, I will call you.","После if в First Conditional используется Present Simple."],["Этот документ был отправлен вчера.","This document was sent yesterday.","Was sent — Past Simple Passive."]]};
-const V={work:[["delegation","делегация"],["arrival","прибытие"],["departure","вылет / отбытие"],["bilateral meeting","двусторонняя встреча"],["accompany","сопровождать"]],daily:[["actually","на самом деле"],["available","свободный / доступный"],["probably","вероятно"],["instead","вместо"]],grammar:[["in advance","заранее"],["already","уже"],["yet","ещё / уже"],["since","с определённого момента"]]};
-const M={work:["English for Work","Делегации, аэропорт, гостиница, встречи и протокол."],daily:["Everyday English","Естественные фразы для ежедневного общения."],grammar:["Grammar Practice","Грамматика B1–B2 на практических примерах."]};
+const L={
+work:[
+["Машина будет ждать вас у входа.","The car will be waiting for you at the entrance.","Для места встречи естественно: at the entrance."],
+["Как прошёл ваш полёт?","How was your flight?","Короткий и естественный вопрос после прибытия."],
+["Наш коллега поможет вам с регистрацией в гостинице.","Our colleague will help you with the hotel check-in.","Help you with + существительное — естественная конструкция."],
+["Пожалуйста, отправьте мне информацию о вашем рейсе прибытия и вылета.","Please send me your arrival and departure flight details.","Flight details — естественная деловая формулировка."],
+["Если вам понадобится помощь, пожалуйста, обращайтесь ко мне.","If you need any assistance, please feel free to contact me.","Please feel free to contact me — вежливая деловая формула."],
+["Просим направить текст выступления заранее.","Please send us the text of the speech in advance.","In advance означает «заранее»."],
+["Я направлю вам обновлённую программу сегодня вечером.","I will send you the updated programme this evening.","Updated programme — обновлённая программа."],
+["Пожалуйста, подтвердите получение данного сообщения.","Please confirm receipt of this message.","Confirm receipt — стандартная деловая формула."]
+],
+airport:[
+["Наш коллега встретит вас в VIP-зале аэропорта.","Our colleague will meet you at the airport VIP lounge.","Meet someone at — встретить кого-либо в определённом месте."],
+["Машина будет ждать вас у выхода.","The car will be waiting for you at the exit.","At the exit — у выхода."],
+["Ваш багаж доставят после прохождения необходимых процедур.","Your luggage will be delivered after the necessary procedures have been completed.","Passive voice подходит для официального объяснения процедуры."],
+["Пожалуйста, сообщите нам время вашего прибытия.","Please let us know your arrival time.","Let us know — естественный способ попросить сообщить информацию."],
+["Регистрация на рейс закрывается за один час до вылета.","Check-in closes one hour before departure.","Check-in closes — стандартная формулировка в аэропорту."],
+["Автобус отправится из гостиницы в 8:15.","The bus will depart from the hotel at 8:15.","Depart from — отправляться из."],
+["Все делегации будут встречены в аэропорту.","All delegations will be met at the airport.","Будущее пассивное: will be + past participle."],
+["Пожалуйста, отправьте копию вашего паспорта для организации VIP-зала.","Please send a copy of your passport so that we can arrange VIP lounge access.","So that we can — естественно объясняет цель просьбы."]
+],
+meetings:[
+["Заседание начнётся в 10 часов утра.","The meeting will begin at 10 a.m.","Begin подходит для официального контекста."],
+["Двусторонняя встреча состоится после обеда.","The bilateral meeting will take place in the afternoon.","Take place часто используется для официальных мероприятий."],
+["Главы делегаций примут участие в церемонии возложения цветов.","The heads of delegation will take part in the wreath-laying ceremony.","Take part in — принимать участие в."],
+["Просим вас прибыть за десять минут до начала встречи.","Please arrive ten minutes before the meeting begins.","Arrive + время; before the meeting begins звучит естественно."],
+["Перевод будет обеспечен на английский и русский языки.","Interpretation will be provided in English and Russian.","Interpretation — устный перевод; translation — письменный."],
+["Список выступающих будет подготовлен Секретариатом.","The list of speakers will be prepared by the Secretariat.","Пассивная конструкция типична для официального английского."],
+["После заседания состоится официальный ужин.","An official dinner will take place after the meeting.","Take place подходит для запланированного мероприятия."],
+["Пожалуйста, сообщите, желает ли глава вашей делегации выступить.","Please let us know whether the head of your delegation would like to speak.","Would like to — вежливая официальная форма."]
+],
+daily:[
+["Я немного опоздаю.","I will be a little late.","A little late — естественная формулировка."],
+["Я перезвоню вам через десять минут.","I will call you back in ten minutes.","In ten minutes = через десять минут."],
+["Не могли бы вы повторить это ещё раз?","Could you please say that again?","Could you please — вежливая просьба."],
+["Давайте продолжим завтра.","Let's continue tomorrow.","Let's + глагол предлагает совместное действие."],
+["Я сейчас в дороге.","I'm on my way now.","On my way — естественно: «я уже еду / в дороге»."],
+["Я сообщу вам, как только получу информацию.","I will let you know as soon as I receive the information.","После as soon as для будущего используется Present Simple."],
+["Я не совсем понял ваш вопрос.","I didn't quite understand your question.","Quite смягчает фразу и делает её естественнее."],
+["Можете отправить мне это в WhatsApp?","Could you send it to me on WhatsApp?","Could you — вежливее, чем прямое Can you."]
+],
+grammar:[
+["Я работаю здесь уже пять лет.","I have worked here for five years.","Present Perfect связывает прошлое с настоящим."],
+["Когда я приехал, встреча уже началась.","When I arrived, the meeting had already started.","Past Perfect показывает более раннее действие в прошлом."],
+["Если у меня будет время, я позвоню вам.","If I have time, I will call you.","После if в First Conditional используется Present Simple."],
+["Этот документ был отправлен вчера.","This document was sent yesterday.","Was sent — Past Simple Passive."],
+["Мы уже забронировали гостиницу.","We have already booked the hotel.","Already часто используется с Present Perfect."],
+["Я ещё не получил подтверждение.","I haven't received confirmation yet.","Yet обычно ставится в конце отрицательного предложения."],
+["Она работает здесь с 2022 года.","She has worked here since 2022.","Since — начальная точка; for — продолжительность."],
+["К тому времени делегация уже прибыла.","By that time, the delegation had already arrived.","Past Perfect показывает действие, завершившееся к моменту в прошлом."]
+]};
+const V={
+work:[["confirm receipt","подтвердить получение"],["updated programme","обновлённая программа"],["in advance","заранее"],["assistance","помощь"],["flight details","данные рейса"]],
+airport:[["arrival","прибытие"],["departure","вылет / отбытие"],["VIP lounge","VIP-зал"],["luggage","багаж"],["check-in","регистрация на рейс"]],
+meetings:[["bilateral meeting","двусторонняя встреча"],["head of delegation","глава делегации"],["speaker","выступающий"],["interpretation","устный перевод"],["wreath-laying","возложение цветов"]],
+daily:[["on my way","я в дороге"],["as soon as","как только"],["actually","на самом деле"],["available","свободный / доступный"],["instead","вместо"]],
+grammar:[["already","уже"],["yet","ещё / уже"],["since","с определённого момента"],["for","в течение"],["by that time","к тому времени"]]};
+const M={
+work:["English for Work","Деловые сообщения и формулировки для ежедневной работы."],
+airport:["Airport & Delegations","Встреча и проводы делегаций, VIP-зал, транспорт и гостиница."],
+meetings:["Meetings & Protocol","Заседания, двусторонние встречи, выступления и протокол."],
+daily:["Everyday English","Естественные фразы для ежедневного общения."],
+grammar:["Grammar Practice","Грамматика B1–B2 на практических примерах."]
+};
 let s=JSON.parse(localStorage.getItem("myEnglishV2")||'{"cat":"work","i":0,"done":0,"checked":0}');
 const $=id=>document.getElementById(id);function save(){localStorage.setItem("myEnglishV2",JSON.stringify(s))}
-function render(){let x=L[s.cat][s.i%L[s.cat].length];$("title").textContent=M[s.cat][0];$("subtitle").textContent=M[s.cat][1];$("prompt").textContent=x[0];$("input").value="";$("feedback").className="feedback";$("done").textContent=s.done;$("checked").textContent=s.checked;$("bar").style.width=Math.min(100,s.done/20*100)+"%";$("words").innerHTML="<h2>Mini vocabulary</h2>"+V[s.cat].map(w=>`<div class="word"><span>${w[0]}</span><span>${w[1]}</span></div>`).join("");document.querySelectorAll("[data-cat]").forEach(b=>b.classList.toggle("active",b.dataset.cat===s.cat))}
-$("check").onclick=()=>{if(!$("input").value.trim())return $("input").focus();let x=L[s.cat][s.i%L[s.cat].length];s.checked++;save();$("checked").textContent=s.checked;$("answer").textContent="Natural English: "+x[1];$("tip").textContent=x[2]+" Ваш вариант: “"+$("input").value.trim()+"”.";$("feedback").className="feedback show"};
+function render(){let x=L[s.cat][s.i%L[s.cat].length];$("title").textContent=M[s.cat][0];$("subtitle").textContent=M[s.cat][1];$("prompt").textContent=x[0];$("input").value="";$("feedback").className="feedback";$("done").textContent=s.done;$("checked").textContent=s.checked;$("bar").style.width=Math.min(100,s.done/40*100)+"%";$("words").innerHTML="<h2>Mini vocabulary</h2>"+V[s.cat].map(w=>`<div class="word"><span>${w[0]}</span><span>${w[1]}</span></div>`).join("");document.querySelectorAll("[data-cat]").forEach(b=>b.classList.toggle("active",b.dataset.cat===s.cat))}
+$("check").onclick=()=>{if(!$("input").value.trim())return $("input").focus();let x=L[s.cat][s.i%L[s.cat].length],u=$("input").value.trim();s.checked++;save();$("checked").textContent=s.checked;const norm=t=>t.toLowerCase().replace(/[^a-z0-9\s]/g,"").replace(/\s+/g," ").trim();let a=new Set(norm(x[1]).split(" ")),b=new Set(norm(u).split(" ")),common=[...a].filter(w=>b.has(w)).length,score=Math.round(100*common/Math.max(1,a.size));$("answer").textContent=(score>=75?"✓ Очень близко! ":"Natural English: ")+x[1];$("tip").textContent=x[2]+" Совпадение ключевых слов: "+score+"%. Ваш вариант: “"+u+"”.";$("feedback").className="feedback show"};
 $("show").onclick=()=>{let x=L[s.cat][s.i%L[s.cat].length];$("answer").textContent="Answer: "+x[1];$("tip").textContent=x[2];$("feedback").className="feedback show"};
 $("next").onclick=()=>{s.i=(s.i+1)%L[s.cat].length;s.done++;save();render()};document.querySelectorAll("[data-cat]").forEach(b=>b.onclick=()=>{s.cat=b.dataset.cat;s.i=0;save();render()});render();
 </script></body></html>
