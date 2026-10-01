@@ -16,7 +16,8 @@
 <section class="card page hidden" id="notebook"><h2>📝 Мой словарь</h2><p class="muted">Записывайте незнакомые слова и выражения, которые хотите повторить позже.</p><div id="notebookForm"></div><div id="notebookList"></div></section>
 <section class="card page hidden" id="admin"><h2>🔐 Панель администратора</h2><div id="adminBox"></div></section>
 </main></div><div class="footer">My English · Practical English for Protocol & International Relations</div></div>
-<script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
 const protocol=[
 {t:'Airport & VIP Lounge',d:'Встреча, багаж, VIP-зал, транспорт',phr:[['Welcome to Dushanbe. My name is … and I represent the Parliament of Tajikistan.','Добро пожаловать в Душанбе. Меня зовут …, я представляю Парламент Таджикистана.'],['How was your flight?','Как прошёл ваш полёт?'],['Our protocol officer will assist you through the VIP lounge.','Наш сотрудник протокола поможет вам пройти через VIP-зал.'],['Your car is waiting at the entrance.','Ваша машина ожидает у входа.'],['We will take care of your luggage and passport formalities.','Мы поможем с багажом и паспортными формальностями.']]},
 {t:'Hotel & Accommodation',d:'Заселение, номера, программа',phr:[['Our colleagues will assist you with the hotel check-in.','Наши коллеги помогут вам с регистрацией в гостинице.'],['Your meeting materials and badge have been placed in your room.','Материалы заседания и бейдж размещены в вашем номере.'],['Breakfast is served from 7 a.m.','Завтрак подаётся с 7 утра.'],['The bus will depart from the hotel entrance at 8:15 a.m.','Автобус отправится от входа в гостиницу в 8:15.']]},
@@ -52,7 +53,11 @@ $('vocabBox').innerHTML=Object.entries(vocab).map(([k,v])=>`<div class="quiz" st
 let gi=0;function renderGrammar(){let x=grammar[gi%grammar.length];$('practiceBox').innerHTML=`<div class="quiz"><div class="prompt">${x[0]}</div><textarea id="ginput" placeholder="Переведите на английский..."></textarea><div class="actions"><button class="primary" onclick="checkGrammar()">Check</button><button class="secondary" onclick="showGrammar()">Show answer</button><button class="secondary" onclick="gi=(gi+1)%grammar.length;state.done++;save();renderGrammar()">Next</button></div><div id="gfeedback" class="feedback"></div></div>`}function checkGrammar(){if(!$('ginput').value.trim())return $('ginput').focus();state.checked++;save();showGrammar()}function showGrammar(){let x=grammar[gi%grammar.length];$('gfeedback').innerHTML=`<div class="answer">Natural English: ${x[1]}</div><div class="tip">${x[2]}</div>`;$('gfeedback').classList.add('show')}renderGrammar();function complete(){state.done++;save()}
 $('reset').onclick=()=>{if(confirm('Сбросить весь прогресс?')){state={done:0,checked:0,visited:[]};save()}};updateStats();
 
-// --- Personal cabinet, notebook and local admin ---
+
+const SUPABASE_URL = 'https://oyxlgplkeohblohjxjtd.supabase.co'; 
+const SUPABASE_KEY = 'sb_publishable_J7f5eL1-VPiSbttOMkbq9g_VrDKjg9H';
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    // --- Personal cabinet, notebook and local admin ---
 let profiles=JSON.parse(localStorage.getItem('myEnglishProfiles')||'[]');
 let currentUser=localStorage.getItem('myEnglishCurrentUser')||'';
 function saveProfiles(){localStorage.setItem('myEnglishProfiles',JSON.stringify(profiles))}
